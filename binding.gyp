@@ -18,10 +18,14 @@
         'PLATFORM="<(OS)"',
       ],
       'link_settings': {
-                          'libraries': [
-                              '-L/usr/lib', '-lopenssl',
-                          ]
-                       },
+            'library_dirs': [
+                              '/usr/local/opt/openssl/lib',
+                              '/usr/lib',
+                ],
+                'libraries': [
+                     '-lssl',
+                ],
+      },
  'conditions': [
         [ 'OS=="win"', {
           'conditions': [
