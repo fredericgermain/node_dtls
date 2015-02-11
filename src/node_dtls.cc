@@ -150,11 +150,13 @@ int generate_cookie(SSL *ssl, unsigned char *cookie, unsigned int *cookie_len)
     {
     unsigned char *buffer, result[EVP_MAX_MD_SIZE];
     unsigned int length = 0, resultlength;
+#ifdef READ_PEER
     union {
         struct sockaddr_storage ss;
         struct sockaddr_in6 s6;
         struct sockaddr_in s4;
     } peer;
+#endif
 
     /* Initialize a random secret */
     if (!cookie_initialized)
@@ -187,7 +189,7 @@ int generate_cookie(SSL *ssl, unsigned char *cookie, unsigned int *cookie_len)
     memcpy((buffer + sizeof(unsigned int)), &iWBio, sizeof(unsigned int));
     //fprintf(stderr, ">>>>>>>>>>>>>> Printing SSL BIOs ::> rbio:[%x][%d], wbio:[%x][%d], len:[%d]\n", (unsigned int)pRBio, (unsigned int)pWBio, iRBio, iWBio, length);
 
-#if 0
+#ifdef READ_PEER
     /* Read peer information */
     (void) BIO_dgram_get_peer(SSL_get_rbio(ssl), &peer);
 
@@ -252,11 +254,13 @@ int verify_cookie(SSL *ssl, unsigned char *cookie, unsigned int cookie_len)
     {
     unsigned char *buffer, result[EVP_MAX_MD_SIZE];
     unsigned int length = 0, resultlength;
+#ifdef READ_PEER
     union {
         struct sockaddr_storage ss;
         struct sockaddr_in6 s6;
         struct sockaddr_in s4;
     } peer;
+#endif
 
     /* If secret isn't initialized yet, the cookie can't be valid */
     if (!cookie_initialized)
@@ -282,7 +286,7 @@ int verify_cookie(SSL *ssl, unsigned char *cookie, unsigned int cookie_len)
     memcpy((buffer + sizeof(unsigned int)), &iWBio, sizeof(unsigned int));
     //fprintf(stderr, ">>>>>>>>>>>>>> Printing SSL BIOs ::> rbio:[%x][%d], wbio:[%x][%d], len:[%d]\n", (unsigned int)pRBio, (unsigned int)pWBio, iRBio, iWBio, length);
 
-#if 0
+#ifdef READ_PEER
     /* Read peer information */
     (void) BIO_dgram_get_peer(SSL_get_rbio(ssl), &peer);
 
