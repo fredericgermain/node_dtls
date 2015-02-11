@@ -43,3 +43,9 @@ c) log4js.
 d) nodeload.
 
 
+Changes in node_dtls 0.0.2:
+	a) Dont require any openssl changes.
+	b) Will Compile with latest node v0.10.12
+	
+
+

@@ -1,0 +1,11 @@
+sage Queue Stats:
+
+Defines:
+
+Threshold Limit (messageQueueThresholdLimit): Crossing this threshold limit an indication should be provided my means of an log,alaram to the tester indicating that the message queue size is crossing the threshold limit.  
+
+message queue (Configurable Parameters):
+
+a) LOW_WATER_MARK <-> HIGH_WATER_MARK: this determines the size of the message queue.
+
+

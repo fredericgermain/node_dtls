@@ -65,7 +65,7 @@ function connectToDtlsServer(requestId){
 
     var srcPort = 23233 + requestId;
     //var socket = dtls.connect(8080,"192.168.2.35",options, function() 
-    var socket = dtls.connect(23232,"192.168.2.79",srcPort, options, function() {
+    var socket = dtls.connect(23232,"192.168.2.181",srcPort, options, function() {
     //var socket = dtls.connect(23232,"192.168.4.15",23231, options, function() {
 		console.log('>>>>>>>>>>> dtls.connect callback()');
         if (socket.authorized) {
@@ -73,7 +73,7 @@ function connectToDtlsServer(requestId){
             socket.id = requestId;
             var connectTime = microtime.now()-startTime;
 
-            logger.info("Auth success, connected to TLS server id:"+startTime);
+            logger.info("Auth success, connected to TLS server id:");
 //            if(connectTime < minTime){
 //                minTime = connectTime;
 //            }
@@ -104,7 +104,7 @@ function connectToDtlsServer(requestId){
         }
         startTime = microtime.now();
 		var send_data = "echo message " + startTime;
-        //socket.write("echo message");
+        socket.write("echo message");
         socket.write(send_data);
 		console.log(">>>>>>>>>>> sending data to echo server ::> send_data:["+ send_data +"]");
     });
