@@ -1296,7 +1296,7 @@ Handle<Value> Connection::New(const Arguments& args) {
 #endif
 
   SSL_set_bio(p->ssl_, p->bio_read_, p->bio_write_);
-  fprintf(stderr, "Connection::New ::> ctx:[%x], ssl:[%x], rbio:[%x], wbio:[%x]\n", sc->ctx_, p->ssl_, p->bio_read_, p->bio_write_);
+  fprintf(stderr, "Connection::New ::> ctx:[%p], ssl:[%p], rbio:[%p], wbio:[%p]\n", sc->ctx_, p->ssl_, p->bio_read_, p->bio_write_);
   /* Added to support DTLS - Gaffar */
   //{{
   SSL_set_options(p->ssl_, SSL_OP_COOKIE_EXCHANGE);
