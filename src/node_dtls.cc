@@ -172,8 +172,8 @@ int generate_cookie(SSL *ssl, unsigned char *cookie, unsigned int *cookie_len)
 
     BIO *pRBio = SSL_get_rbio(ssl);
     BIO *pWBio = SSL_get_wbio(ssl);
-    int iRBio = (unsigned int)pRBio;
-    int iWBio = (unsigned int)pWBio;
+    intptr_t iRBio = (intptr_t)pRBio;
+    intptr_t iWBio = (intptr_t)pWBio;
     length = 0;
     length += sizeof(iRBio);
     length += sizeof(iWBio);
@@ -185,8 +185,8 @@ int generate_cookie(SSL *ssl, unsigned char *cookie, unsigned int *cookie_len)
         return 0;
         }
 
-    memcpy(buffer, &iRBio, sizeof(unsigned int));
-    memcpy((buffer + sizeof(unsigned int)), &iWBio, sizeof(unsigned int));
+    memcpy(buffer, &iRBio, sizeof(intptr_t));
+    memcpy((buffer + sizeof(intptr_t)), &iWBio, sizeof(intptr_t));
     //fprintf(stderr, ">>>>>>>>>>>>>> Printing SSL BIOs ::> rbio:[%x][%d], wbio:[%x][%d], len:[%d]\n", (unsigned int)pRBio, (unsigned int)pWBio, iRBio, iWBio, length);
 
 #ifdef READ_PEER
@@ -269,8 +269,8 @@ int verify_cookie(SSL *ssl, unsigned char *cookie, unsigned int cookie_len)
 
     BIO *pRBio = SSL_get_rbio(ssl);
     BIO *pWBio = SSL_get_wbio(ssl);
-    int iRBio = (unsigned int)pRBio;
-    int iWBio = (unsigned int)pWBio;
+    intptr_t iRBio = (intptr_t)pRBio;
+    intptr_t iWBio = (intptr_t)pWBio;
     length = 0;
     length += sizeof(iRBio);
     length += sizeof(iWBio);
@@ -282,8 +282,8 @@ int verify_cookie(SSL *ssl, unsigned char *cookie, unsigned int cookie_len)
         return 0;
         }
 
-    memcpy(buffer, &iRBio, sizeof(unsigned int));
-    memcpy((buffer + sizeof(unsigned int)), &iWBio, sizeof(unsigned int));
+    memcpy(buffer, &iRBio, sizeof(intptr_t));
+    memcpy((buffer + sizeof(intptr_t)), &iWBio, sizeof(intptr_t));
     //fprintf(stderr, ">>>>>>>>>>>>>> Printing SSL BIOs ::> rbio:[%x][%d], wbio:[%x][%d], len:[%d]\n", (unsigned int)pRBio, (unsigned int)pWBio, iRBio, iWBio, length);
 
 #ifdef READ_PEER
